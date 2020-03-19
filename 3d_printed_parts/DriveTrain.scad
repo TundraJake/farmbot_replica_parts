@@ -15,7 +15,7 @@ wheelStartPos = 16;
 
 M5Radius = 5 / 2 + .3;
 
-thickness = 8;
+thickness = 9;
 
 module TopWheelMount(){
     difference(){
@@ -79,7 +79,7 @@ module BoltTightenerCutout(){
     //1.6 real
     rotate([90,0,0]) translate([85,thickness/2,-3]) cube([6.5,18,3], center=true);
     rotate([90,0,0]) translate([85,thickness/2,-6]) cylinder(r=radius, h=boltLength);
-    rotate([90,0,0]) translate([85,thickness/2,22]) cylinder(r=radius + 1, h=boltLength);
+    rotate([90,0,0]) translate([85,thickness/2,23]) cylinder(r=radius + 2, h=boltLength);
 }
 
 module Fillet(){
