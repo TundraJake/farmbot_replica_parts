@@ -13,9 +13,9 @@ wheelOffset = 35;
 bottomWheelOffset = 15;
 wheelStartPos = 16;
 
-M5Radius = 5 / 2;
+M5Radius = 5 / 2 + .3;
 
-thickness = 5;
+thickness = 8;
 
 module TopWheelMount(){
     difference(){
@@ -43,7 +43,7 @@ module Connector(){
 
 module WheelCones(x, y, z=thickness){
     translate([x, y, z])
-        cylinder(r1=5, r=2.5, h=z);
+        cylinder(r1=5, r=2.8, h=z);
 }
 
 module TopWheelCones(){
@@ -53,7 +53,7 @@ module TopWheelCones(){
 }
 
 module BottomWheelCones(){
-    y = topHeight/2 - 12.5 - 20 - 12.5;
+    y = topHeight/2 - 12.5 - 20 - 8.5;
     translate([0, y, 0])
         for (i = [0:1])
             WheelCones(wheelStartPos +i*wheelOffset + bottomWheelOffset,0);
@@ -62,24 +62,24 @@ module BottomWheelCones(){
 module TopWheelSlots(){
     translate([0, topHeight/2, 0])
         for (i = [0:2])
-            translate([wheelStartPos + i*wheelOffset,0,0]) cylinder(r=M5Radius, h=5*2);
+            translate([wheelStartPos + i*wheelOffset,0,0]) cylinder(r=M5Radius, h=thickness*2);
 }
 
 module BottomWheelSlots(){
-    y = topHeight/2 - 12.5 - 20 - 12.5;
+    y = topHeight/2 - 12.5 - 20 - 8.5;
     translate([0, y, 0])
         for (i = [0:1])
-            translate([wheelStartPos +i*wheelOffset + bottomWheelOffset,0,0]) cylinder(r=M5Radius, h=5*2);
+            translate([wheelStartPos +i*wheelOffset + bottomWheelOffset,0,0]) cylinder(r=M5Radius, h=thickness*2);
 }
 
 module BoltTightenerCutout(){
-    boltLength = 25;
+    boltLength = 30;
     nutHeight = 5;
     radius = 1.6;
     //1.6 real
-    rotate([90,0,0]) translate([85,thickness/2,-3]) cube([5.1,6,2.5], center=true);
+    rotate([90,0,0]) translate([85,thickness/2,-3]) cube([6.5,18,3], center=true);
     rotate([90,0,0]) translate([85,thickness/2,-6]) cylinder(r=radius, h=boltLength);
-    rotate([90,0,0]) translate([85,thickness/2,22]) cylinder(r=radius, h=boltLength);
+    rotate([90,0,0]) translate([85,thickness/2,22]) cylinder(r=radius + 1, h=boltLength);
 }
 
 module Fillet(){
