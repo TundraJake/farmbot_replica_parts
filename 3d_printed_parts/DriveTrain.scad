@@ -19,6 +19,36 @@ M5BoltHeadHeight = 4.1;
 
 thickness = 8;
 
+/*
+Nema Mount found at
+https://www.thingiverse.com/thing:3359575
+*/
+
+module AluminumExtrusionCutout(){
+    module ScrewPosition(){
+        translate([25,thickness/2+4,thickness/2]) rotate([-90,0,0]) children();
+    }
+    
+    module ScrewCutout(){
+        screwRadius = 2.45;
+        screwHeightCutout = 16;
+        cylinder(r=screwRadius, h=screwHeightCutout);
+    }
+    
+    module NutPosition(){
+        translate([25,thickness/2+8,thickness/2 + 1]) rotate([-90,0,0]) children();
+    }
+    
+    module NutCutout(){
+        nutLength = 7.9;
+        nutHeight = 3.93;
+        cube([nutLength, nutLength+5, nutHeight], center=true);
+    }
+    
+    ScrewPosition() ScrewCutout();
+    NutPosition() NutCutout();
+}
+
 module TopWheelMount(){
     difference(){
         union(){
@@ -99,11 +129,10 @@ module Smooth(){
 
 
 
-
-
 module DriveTrain(){
      difference() {
         union(){
+            
             TopWheelCones();
             BottomWheelCones();
             linear_extrude(thickness) Smooth() Fillet() union(){
@@ -112,6 +141,7 @@ module DriveTrain(){
                 BottomWheelMount();
             }
        }
+       AluminumExtrusionCutout();
        TopWheelSlots();
        BottomWheelSlots();
        BoltTightenerCutout();
