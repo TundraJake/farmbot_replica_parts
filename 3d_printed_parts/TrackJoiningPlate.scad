@@ -3,7 +3,7 @@
 yPos1 = 10;
 yPos2 = 70;
 yPos3 = 90;
-radius = 2.75;
+radius = 2.5;
 
 module JoinPlate()
 {
