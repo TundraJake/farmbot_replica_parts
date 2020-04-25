@@ -15,8 +15,9 @@ module AluminumExtrusionMount(){
     mountWidth = 25;
     baseHeight = 10;
     
+    
+    
     module Column(){
-        
         extrusionWidth = 20.1;
         columnHeight = 30;
         linear_extrude(columnHeight) difference(){
@@ -25,7 +26,22 @@ module AluminumExtrusionMount(){
         }
     }
     
-    module b
+    module ExtrusionSlot(){
+        width = 20;
+        height = 40;
+        perimeterWidth = width - 2;
+        translate([0,0,height/2]) difference(){
+            cube([width,width,height], center=true);
+            cube([perimeterWidth,perimeterWidth,height], center=true);
+            rotate([90,0,0]) cylinder(r=2.2, h= 30, center=true);
+        }
+    }
+   
+    // Base Cutouts
+    module DriveTrainCutout(){
+        driveTrainWidth = 4;
+        cube([driveTrainWidth, 100, 3], center=true);
+    }
     
     module ScrewCutout(){
         screwRadius = 2.45;
@@ -35,10 +51,16 @@ module AluminumExtrusionMount(){
         translate([0,0,0]) cylinder(r=screwRadius, h =baseHeight);
     }
     
+    
+    
     module Base(){
         difference(){
-            linear_extrude(baseHeight) Smooth() square([mountWidth, mountWidth], center=true);
+            union(){
+                linear_extrude(baseHeight) Smooth() square([mountWidth, mountWidth], center=true);
+                ExtrusionSlot();
+            }  
             ScrewCutout();
+            DriveTrainCutout();
         }
     }
     
