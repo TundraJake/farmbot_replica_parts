@@ -27,20 +27,21 @@ module AluminumExtrusionMount(){
     }
     
     module ExtrusionSlot(){
-        width = 20;
+        width = 24;
         height = 40;
         perimeterWidth = width - 2;
         translate([0,0,height/2]) difference(){
             cube([width,width,height], center=true);
             cube([perimeterWidth,perimeterWidth,height], center=true);
-            rotate([90,0,0]) cylinder(r=2.2, h= 30, center=true);
+            rotate([90,0,0]) cylinder(r=2.5, h= 30, center=true);
         }
     }
    
     // Base Cutouts
     module DriveTrainCutout(){
-        driveTrainWidth = 4;
-        cube([driveTrainWidth, 100, 3], center=true);
+        driveTrainWidth = 8;
+        cutoutHeight = 6;
+        cube([driveTrainWidth, 100, cutoutHeight], center=true);
     }
     
     module ScrewCutout(){
